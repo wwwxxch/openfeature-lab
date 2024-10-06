@@ -47,6 +47,11 @@ Apply flag yaml, deploy `FeatureFlag` and `FeatureFlagSource` to kubernetes clus
 kubectl -n default apply -f flag.yaml
 ```
 
+To observe in local machine
+```
+k port-forward svc/open-feature-demo-app-service 30000
+```
+
 Get the custom resource (CRs)
 
 ```
@@ -75,6 +80,13 @@ kubectl -n default apply -f app.yaml
 
 1. Visit http://localhost:30000/ping
 
+```
+curl -s -H "email: aaa@othercompany.com" -X GET http://localhost:30000/ping
+```
+```
+curl -s -H "email: aaa@mycompany.com" -X GET http://localhost:30000/ping  
+```
+
 2. Change `flag.yaml` and apply `flag.yaml` again
 
 edit `FeatureFlag` resource in `flag.yaml`
@@ -86,6 +98,13 @@ kubectl -n default apply -f app.yaml
 ```
 
 3. Visit http://localhost:30000/ping again
+
+```
+curl -s -H "email: aaa@othercompany.com" -X GET http://localhost:30000/ping
+```
+```
+curl -s -H "email: aaa@mycompany.com" -X GET http://localhost:30000/ping  
+```
 
 ## Clear the resource
 
