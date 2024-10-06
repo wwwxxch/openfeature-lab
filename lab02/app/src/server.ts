@@ -18,6 +18,7 @@ type AppConfig = {
 }
 
 // Define a histogram to measure the duration of HTTP requests
+// Define metrics
 const httpRequestDurationMicroseconds = new promClient.Histogram({
   name: 'http_request_duration_ms',
   help: 'Duration of HTTP requests in ms',
@@ -60,6 +61,7 @@ export const startServer = async (appConfig: AppConfig) => {
     const email = request.headers['email'] as string
     // Get the value of the 'experiment' feature flag with the email as the context
     const context = { email }
+    // Get experiment flag
     const enableExperimentFeature = await client.getBooleanValue('experiment', true, context)
     // Set the flag value according to the feature flag
     request.flag = enableExperimentFeature ? 'Experiment' : 'Normal'
