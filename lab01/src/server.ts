@@ -1,4 +1,4 @@
-import fastify from 'fastify'
+import fastify from 'fastify' // fastify: kind of node js API server
 import { OpenFeature } from '@openfeature/server-sdk'
 import { FlagdProvider } from '@openfeature/flagd-provider'
 
@@ -12,6 +12,7 @@ export const startServer = async (appConfig: AppConfig) => {
   const server = fastify()
 
   // Initialize OpenFeature
+  // Need to setup the where the flag service is
   OpenFeature.setProvider(
     new FlagdProvider({
       host: 'localhost',
@@ -27,6 +28,7 @@ export const startServer = async (appConfig: AppConfig) => {
 
   server.get('/ping', async (request, reply) => {
     // Evaluate the feature flag 'feature-a'
+    // Here put the flag name we expect to get & default value 
     const enableFeatureA = await client.getBooleanValue('feature-a', false)
     if (enableFeatureA) {
       return { message: 'pong!pong!pong!' }
