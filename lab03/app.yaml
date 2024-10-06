@@ -21,6 +21,7 @@ spec:
       containers:
         - name: open-feature-demo
           image: lab02-app:latest # build from lab02
+          # image: chihhuiw/openfeature:lab02 # if bulid failed
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 30000
