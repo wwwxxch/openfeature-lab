@@ -38,6 +38,8 @@ services:
       - ./flagd:/etc/flagd
   app:
     build: app
+    # if build failed, use below
+    # image: chihhuiw/openfeature:lab02
     container_name: app
     depends_on:
       - flagd
